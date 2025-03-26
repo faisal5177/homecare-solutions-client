@@ -8,7 +8,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* About Section */}
           <div>
-            <h2 className="text-3xl font-bold text-green-400">Homecare Solutions</h2>
+          <img
+              className="w-[60px] h-auto rounded-full"
+              src="https://i.ibb.co/gLzZFk9R/homecare-solutions-logo.jpg"
+              alt="Homecare Solutions Logo"
+            />
+            <h2 className="text-3xl font-bold text-green-400">Homecare</h2>
+            <span className="font-bold text-green-400 ml-[100px]"> Solutions</span>
             <p className="text-gray-400 mt-3">
               Ensuring quality homecare services with compassion and expertise. We are here to make life easier and better for your loved ones.
             </p>

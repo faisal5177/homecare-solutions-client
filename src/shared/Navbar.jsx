@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from './../context/AuthContext';
 
 const Navbar = () => {
@@ -8,7 +8,7 @@ const Navbar = () => {
   const handleSignOut = () => {
     signOutUser()
       .then(() => {
-        console.log("Successful sign out");
+        console.log('Successful sign out');
       })
       .catch((error) => {
         console.log("Failed to sign out. Stay here. Don't leave me alone");
@@ -28,13 +28,25 @@ const Navbar = () => {
           <summary>Dashboard</summary>
           <ul className="p-2">
             <li>
-              <Link to="/addService">Add a New Service</Link>
+              <Link to="/addService" className="block p-2 hover:bg-gray-200">
+                Add a New Service
+              </Link>
             </li>
             <li>
-              <Link to="/bookedServices">Manage Services</Link>
+              <Link
+                to="/bookedServices"
+                className="block p-2 hover:bg-gray-200"
+              >
+                Manage Services
+              </Link>
             </li>
             <li>
-            <Link to="/viewServiceBookingApplications">Service To Do</Link>
+              <Link
+                to="/viewServiceBookingApplications"
+                className="block p-2 hover:bg-gray-200"
+              >
+                Service To Do
+              </Link>
             </li>
           </ul>
         </details>
@@ -74,11 +86,14 @@ const Navbar = () => {
           </div>
 
           {/* Logo */}
-          <img
-            className="w-[70px]"
-            src="https://i.ibb.co/x8F3rnJ4/nobo-Ghor-Logo.png"
-            alt="Nobo Ghor Logo"
-          />
+          <div className="flex btn items-center">
+            <img
+              className="w-[60px] h-auto rounded-full"
+              src="https://i.ibb.co/gLzZFk9R/homecare-solutions-logo.jpg"
+              alt="Homecare Solutions Logo"
+            />
+            <h2 className="font-bold text-xl ">Homecare Solutions</h2>
+          </div>
         </div>
 
         {/* Center Nav */}
@@ -109,7 +124,7 @@ const Navbar = () => {
                   className="w-10 h-10 rounded-full border"
                 />
               ) : (
-                <span className="font-bold">{user.displayName || "User"}</span>
+                <span className="font-bold">{user.displayName || 'User'}</span>
               )}
             </div>
           )}

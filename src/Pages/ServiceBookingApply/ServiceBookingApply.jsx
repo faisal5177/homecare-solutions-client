@@ -95,9 +95,9 @@ const ServiceBookingApply = ({onClose = () => {}}) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-md w-96">
-        <h2 className="text-xl font-bold mb-4">Book Service</h2>
+    <div className="fixed inset-0 flex items-center justify-center my-auto bg-black bg-opacity-50">
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-xl font-bold text-center mb-2">Book Service</h2>
         <p>
           <strong>Service:</strong> {service_name}
         </p>
@@ -108,7 +108,7 @@ const ServiceBookingApply = ({onClose = () => {}}) => {
           <strong>Price:</strong> ${price}
         </p>
 
-        <label className="block text-sm font-medium mt-4">Service Date</label>
+        <label className="block text-sm font-medium">Service Date</label>
         <input
           type="date"
           name="serviceDate"
@@ -117,7 +117,7 @@ const ServiceBookingApply = ({onClose = () => {}}) => {
           onChange={handleChange}
         />
 
-        <label className="block text-sm font-medium mt-4">
+        <label className="block text-sm font-medium">
           Select Problems
         </label>
         {problemOptions.map((problem, index) => (
@@ -131,7 +131,7 @@ const ServiceBookingApply = ({onClose = () => {}}) => {
           </div>
         ))}
 
-        <div className="flex justify-end mt-4">
+        <div className="flex justify-end mt-1">
           <button
             className="btn btn-secondary mr-2"
             onClick={() => navigate("/")}

@@ -43,11 +43,11 @@ const AddService = () => {
     console.log('Service Data to be Added:', newService);
 
     try {
-      const response = await fetch(`http://localhost:5000/services`, {
-        method: 'POST',
+      const response = await fetch(`http://localhost:5000/services`, { 
+        method: 'POST', 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newService),
-      });
+      });      
 
       const data = await response.json();
       setLoading(false);

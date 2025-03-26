@@ -46,11 +46,19 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
       }, 
       {
-        path: "viewServiceBookingApplications",
-        element: <PrivateRoute>
-          <ViewServiceBookingApplications />
-        </PrivateRoute>,
-      },           
+        path: "viewServiceBookingApplications/:id",
+        element: <PrivateRoute><ViewServiceBookingApplications /></PrivateRoute>,
+        loader: async ({ params }) => {
+          try {
+            const response = await fetch(`http://localhost:5000/service-application?serviceId=${params.id}`);
+            if (!response.ok) throw new Error("Failed to load applications");
+            return response.json();
+          } catch (error) {
+            console.error("Error loading applications:", error);
+            return [];
+          }
+        }
+      },                
       {
         path: "/bookedServices",
         element: (
