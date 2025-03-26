@@ -16,7 +16,7 @@ const HotServiceCard = ({ service }) => {
         <div className="card bg-base-100 shadow-md border rounded-lg p-3 mb-5">
             {/* Service Image */}
             <figure>
-                <img className="rounded-t-lg h-36 w-full object-cover" src={service_image} alt={service_name} />
+                <img className="rounded-t-lg w-full md:h-36 object-cover" src={service_image} alt={service_name} />
             </figure>
 
             {/* Card Body */}

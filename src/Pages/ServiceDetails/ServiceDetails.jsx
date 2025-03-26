@@ -3,6 +3,10 @@ import { Link, useLoaderData } from "react-router-dom";
 const ServiceDetails = () => {
   const service = useLoaderData();
 
+  if (!service) {
+    return <div>Loading Service Details...</div>;
+  }
+
   const { _id, service_name, service_description, service_image, price, service_provider } = service;
   const { name: provider_name, image: provider_image, location } = service_provider || {};
 
@@ -26,7 +30,7 @@ const ServiceDetails = () => {
 
           <div className="flex justify-between items-center mt-6">
             <p className="text-xl font-bold text-primary">${price}</p>
-            <Link to={`/serviceBook/${_id}`}>
+            <Link to={`/serviceBookingApply/${_id}`}>
               <button className="btn btn-primary">Book Now</button>
             </Link>
           </div>

@@ -8,10 +8,10 @@ const Navbar = () => {
   const handleSignOut = () => {
     signOutUser()
       .then(() => {
-        console.log("successful sign out");
+        console.log("Successful sign out");
       })
       .catch((error) => {
-        console.log("failed to sign out .stay here. dont leave me alone");
+        console.log("Failed to sign out. Stay here. Don't leave me alone");
       });
   };
 
@@ -21,10 +21,23 @@ const Navbar = () => {
         <Link to="/">Home</Link>
       </li>
       <li>
-        <a>Item 2</a>
+        <Link to="/services">Services</Link>
       </li>
       <li>
-      <Link to="">My Booked Services</Link>
+        <details>
+          <summary>Dashboard</summary>
+          <ul className="p-2">
+            <li>
+              <Link to="/addService">Add a New Service</Link>
+            </li>
+            <li>
+              <Link to="/bookedServices">Manage Services</Link>
+            </li>
+            <li>
+            <Link to="/viewServiceBookingApplications">Service To Do</Link>
+            </li>
+          </ul>
+        </details>
       </li>
     </>
   );
@@ -32,7 +45,9 @@ const Navbar = () => {
   return (
     <nav>
       <div className="navbar bg-base-100 shadow-sm">
+        {/* Left Side */}
         <div className="navbar-start">
+          {/* Mobile Dropdown */}
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -52,30 +67,51 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box absolute mt-3 w-52 p-2 shadow"
             >
               {links}
             </ul>
           </div>
-          <h1>Homecare Solutions</h1>
+
+          {/* Logo */}
+          <img
+            className="w-[70px]"
+            src="https://i.ibb.co/x8F3rnJ4/nobo-Ghor-Logo.png"
+            alt="Nobo Ghor Logo"
+          />
         </div>
+
+        {/* Center Nav */}
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
-        <div className="navbar-end">
-          {user ? (
-            <button onClick={handleSignOut} className="btn">
-              Log Out
-            </button>
-          ) : (
+
+        {/* Right Side (Auth) */}
+        <div className="navbar-end flex items-center">
+          {!user ? (
             <>
-              <Link to="/register" className="btn btn-primary">
+              <Link to="/register" className="btn btn-primary mr-2">
                 Register
               </Link>
-              <Link to="/signin">
-                <button className="btn btn-primary ml-5">Log In</button>
+              <Link to="/signin" className="btn btn-secondary">
+                Log In
               </Link>
             </>
+          ) : (
+            <div className="flex items-center space-x-3">
+              <button onClick={handleSignOut} className="btn">
+                Log Out
+              </button>
+              {user.photoURL ? (
+                <img
+                  src={user.photoURL}
+                  alt="User"
+                  className="w-10 h-10 rounded-full border"
+                />
+              ) : (
+                <span className="font-bold">{user.displayName || "User"}</span>
+              )}
+            </div>
           )}
         </div>
       </div>

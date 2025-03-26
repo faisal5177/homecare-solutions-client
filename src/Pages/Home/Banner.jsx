@@ -33,11 +33,11 @@ const Banner = () => {
                         >Services</motion.span></motion.h1>
                     <p className="py-6 text-sm">
                         <span>
-                            <span className="font-bold text-green-400">Cleaning services</span> are essential for maintaining hygiene in homes and offices, especially for busy individuals. These services, including deep cleaning, carpet cleaning, and window cleaning, save time and ensure a healthier environment.
+                            <span className="font-bold text-lg text-green-400">Cleaning services</span> are essential for maintaining hygiene in homes and offices, especially for busy individuals. These services, including deep cleaning, carpet cleaning, and window cleaning, save time and ensure a healthier environment.
                         </span>
                         <br />
                         <span>
-                            <span className="font-bold text-red-400">Electrician services</span> are crucial for resolving electrical issues like faulty fittings, lighting problems, and power outages. Skilled electricians ensure safety and efficiency, making this service vital for home maintenance and new installations.
+                            <span className="font-bold text-lg text-red-400">Electrician services</span> are crucial for resolving electrical issues like faulty fittings, lighting problems, and power outages. Skilled electricians ensure safety and efficiency, making this service vital for home maintenance and new installations.
                         </span>
                     </p>
                     <button className="btn btn-primary">All Services</button>
