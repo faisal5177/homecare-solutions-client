@@ -8,8 +8,9 @@ import PrivateRoute from './PrivateRoute';
 import ServiceBookingApply from './../Pages/ServiceBookingApply/ServiceBookingApply';
 import AddService from './../Pages/AddService/AddService';
 import ServiceDetails from './../Pages/ServiceDetails/ServiceDetails';
-import ViewServiceBookingApplications from "../Pages/ViewServiceBookingApplications/ViewServiceBookingApplications";
 import BookedServices from './../Pages/BookedService/BookedService';
+import AllServices from "../Pages/AllServices/AllServices";
+import ServiceToDo from "../Pages/ServiceToDo/ServiceToDo";
 
 const router = createBrowserRouter([
   {
@@ -46,19 +47,9 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
       }, 
       {
-        path: "viewServiceBookingApplications/:id",
-        element: <PrivateRoute><ViewServiceBookingApplications /></PrivateRoute>,
-        loader: async ({ params }) => {
-          try {
-            const response = await fetch(`http://localhost:5000/service-application?serviceId=${params.id}`);
-            if (!response.ok) throw new Error("Failed to load applications");
-            return response.json();
-          } catch (error) {
-            console.error("Error loading applications:", error);
-            return [];
-          }
-        }
-      },                
+        path: "serviceToDo",
+        element: <PrivateRoute><ServiceToDo /></PrivateRoute>,
+      },                 
       {
         path: "/bookedServices",
         element: (
@@ -66,6 +57,10 @@ const router = createBrowserRouter([
             <BookedServices/>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "allServices",
+        element: <PrivateRoute><AllServices></AllServices></PrivateRoute>
       },
       { path: "/signIn", element: <SignIn /> },
       { path: "/register", element: <Register /> },

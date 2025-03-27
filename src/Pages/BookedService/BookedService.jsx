@@ -72,8 +72,8 @@ const BookedServices = () => {
               <img
                 src={booking.service_image}
                 alt={booking.service_name}
-                className="w-full object-cover rounded"
-              />
+                className="w-full h-48 object-contain rounded bg-gray-100"
+                />
               <h3 className="text-lg font-bold mt-2">{booking.service_name}</h3>
               <p>
                 <strong>Provider:</strong> {booking.provider_name}

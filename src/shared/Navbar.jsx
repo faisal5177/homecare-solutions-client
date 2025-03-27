@@ -21,29 +21,29 @@ const Navbar = () => {
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/services">Services</Link>
+        <Link to="/allServices">Services</Link>
       </li>
       <li>
         <details>
           <summary>Dashboard</summary>
-          <ul className="p-2">
+          <ul className="p-2 flex">
             <li>
-              <Link to="/addService" className="block p-2 hover:bg-gray-200">
+              <Link to="/addService" className="block btn p-2 hover:bg-gray-200">
                 Add a New Service
               </Link>
             </li>
             <li>
               <Link
                 to="/bookedServices"
-                className="block p-2 hover:bg-gray-200"
+                className="block p-2 btn hover:bg-gray-200"
               >
                 Manage Services
               </Link>
             </li>
             <li>
               <Link
-                to="/viewServiceBookingApplications"
-                className="block p-2 hover:bg-gray-200"
+                to="/serviceToDo"
+                className="block p-2 btn hover:bg-gray-200"
               >
                 Service To Do
               </Link>
@@ -98,7 +98,7 @@ const Navbar = () => {
 
         {/* Center Nav */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{links}</ul>
+          <ul className="menu menu-horizontal mt-3 px-1">{links}</ul>
         </div>
 
         {/* Right Side (Auth) */}

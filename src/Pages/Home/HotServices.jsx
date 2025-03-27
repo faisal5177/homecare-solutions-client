@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import HotServiceCard from './HotServiceCard';
 
-const HotServices = () => {
-    const [services, setServices] = useState([]);
-
-    useEffect(() => {
-        fetch('http://localhost:5000/services')
-        .then(res => res.json())
-        .then(data => {
-            setServices(data);
-        })
-    },[])
+const HotServices = ({ services = [] }) => {
+    if (!services.length) {
+        return <p className="text-center text-lg font-semibold mt-10">No services available</p>;
+    }
 
     return (
         <div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-                {
-                    services.map(service =><HotServiceCard key={service._id}  service={service}></HotServiceCard>)
-                }
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {services.map((service) => (
+                    <HotServiceCard key={service._id} service={service} />
+                ))}
             </div>
         </div>
     );
