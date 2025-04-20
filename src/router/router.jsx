@@ -8,7 +8,6 @@ import PrivateRoute from './PrivateRoute';
 import ServiceBookingApply from './../Pages/ServiceBookingApply/ServiceBookingApply';
 import AddService from './../Pages/AddService/AddService';
 import ServiceDetails from './../Pages/ServiceDetails/ServiceDetails';
-import BookedServices from './../Pages/BookedService/BookedService';
 import AllServices from '../Pages/AllServices/AllServices';
 import MyBookings from '../Pages/MyBookings/MyBookings';
 import ViewBookings from '../Pages/ViewBookings/ViewBookings';
@@ -78,14 +77,6 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/services/${params.id}`),
-      },
-      {
-        path: '/bookedServices',
-        element: (
-          <PrivateRoute>
-            <BookedServices />
-          </PrivateRoute>
-        ),
       },
       {
         path: 'allServices',

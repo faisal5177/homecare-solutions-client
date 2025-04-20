@@ -3,49 +3,69 @@ import useAuth from '../../hooks/useAuth';
 import { Link } from 'react-router-dom';
 
 const MyBookedServices = () => {
-    const [services, setServices] = useState([]);
-    const { user } = useAuth();
+  const [bookings, setBookings] = useState([]);
+  const { user } = useAuth();
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/services?email=${user.email}`)
-        .then(res => res.json())
-            .then(data => setServices(data))
-    }, [user.email])
+  useEffect(() => {
+    if (user?.email) {
+      fetch(`http://localhost:5000/enriched-bookings?email=${user.email}`)
+        .then((res) => res.json())
+        .then((data) => setBookings(data))
+        .catch((err) => console.error('Error fetching bookings:', err));
+    }
+  }, [user?.email]);
 
-    return (
-        <div>
-            <h2 className='text-3xl'>My Booked Services: {services.length}</h2>
-            <div className="overflow-x-auto">
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Service Title</th>
-                            <th>Deadline</th>
-                            <th>Booking Count</th>
-                            <th>Bookings</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            services.map((service, index) => <tr key={index}>
-                                <th>{index + 1}</th>
-                                <td>{service.title}</td>
-                                <td>{service.bookingDeadline}</td>
-                                <td>{service.bookingCount}</td>
-                                <td>
-                                    <Link to={`/viewBookings/${service._id}`}>
-                                        <button className='btn btn-link'>View Bookings</button>
-                                    </Link>
-                                </td>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <h2 className="text-3xl mb-4 font-semibold">
+        My Booked Services: {bookings.length}
+      </h2>
+
+      <div className="overflow-x-auto">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Image</th>
+              <th>Service Name</th>
+              <th>Date</th>
+              <th>Price</th>
+              <th>Location</th>
+              <th>Provider</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.map((booking, index) => (
+              <tr key={booking._id}>
+                <td>{index + 1}</td>
+                <td>
+                  <img
+                    src={booking.image || 'https://i.ibb.co/2kRZ7wS/placeholder.png'}
+                    alt={booking.name}
+                    className="w-16 h-16 object-cover rounded"
+                  />
+                </td>
+                <td>{booking.name}</td>
+                <td>
+                  {booking.serviceDate
+                    ? new Date(booking.serviceDate).toLocaleDateString('en-GB', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                      })
+                    : 'No Date'}
+                </td>
+                <td>{booking.price ? `${booking.price}৳` : 'N/A'}</td>
+                <td>{booking.company || 'Unknown'}</td>
+                <td>{booking.status || 'Pending'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 };
 
 export default MyBookedServices;

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from './../context/AuthContext';
+import AuthContext from '../context/AuthContext';
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -8,24 +8,58 @@ const Navbar = () => {
   const handleSignOut = () => {
     signOutUser()
       .then(() => {
-        console.log('Successful sign out');
+        console.log('Successfully signed out');
       })
       .catch((error) => {
-        console.log("Failed to sign out. Stay here. Don't leave me alone");
+        console.error('Failed to sign out:', error);
       });
   };
 
-  // ✅ Dummy ID for now (replace with dynamic logic later if needed)
-  const service_id = '12345';
+  // Navigation links
+  const links = (
+    <>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/allServices">Services</Link>
+      </li>
+      {user && (
+        <li>
+          <div className="dropdown dropdown-right">
+            <div tabIndex={0} role="button" className="">
+              Dashboard
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              <li>
+              <Link to="/addService">Add Service</Link>
+              </li>
+              <li>
+                <Link to="/myBookings">Manage Services</Link>
+              </li>
+              <li>
+              <Link to='/myBookedServices'>Booked-Services</Link>
+              </li>
+              <li>
+                <Link to="/dashboard/service-to-do">Service To-Do</Link>
+              </li>
+            </ul>
+          </div>
+        </li>
+      )}
+    </>
+  );
 
   return (
     <nav>
       <div className="navbar bg-base-100 shadow-sm">
-        {/* Left Side */}
+        {/* Navbar Start */}
         <div className="navbar-start">
-          {/* Mobile Dropdown */}
-          <div className="dropdown lg:hidden">
-            <label tabIndex={0} className="btn btn-ghost">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -40,85 +74,33 @@ const Navbar = () => {
                   d="M4 6h16M4 12h8m-8 6h16"
                 />
               </svg>
-            </label>
+            </div>
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/allServices">Services</Link>
-              </li>
-              <li>
-                <details>
-                  <summary>Dashboard</summary>
-                  <ul className="p-2">
-                    <li>
-                      <Link to="/addService">Add a New Service</Link>
-                    </li>
-                    <li>
-                      <Link to="/bookedServices">Manage Services</Link>
-                    </li>
-                    <li>
-                      <Link to={`/viewBooking/${service_id}`}>
-                        View Booking
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/myBookings">
-                        My Booked Services
-                      </Link>
-                    </li>
-                  </ul>
-                </details>
-              </li>
+              {links}
             </ul>
           </div>
 
           {/* Logo */}
-          <div className="flex items-center space-x-2 btn btn-ghost">
+          <Link to="/" className="flex items-center space-x-2 btn btn-ghost">
             <img
-              className="w-[60px] h-auto rounded-full"
+              className="w-[50px] h-auto rounded-full"
               src="https://i.ibb.co/gLzZFk9R/homecare-solutions-logo.jpg"
               alt="Homecare Solutions Logo"
             />
             <h2 className="font-bold text-xl">Homecare Solutions</h2>
-          </div>
+          </Link>
         </div>
 
-        {/* Center Nav - Desktop */}
+        {/* Navbar Center */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/allServices">Services</Link>
-            </li>
-            <li className="dropdown dropdown-hover dropdown-end">
-              <div tabIndex={0} role="button" className="">
-                Dashboard
-              </div>
-              <ul
-                tabIndex={0}
-                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-              >
-                <li>
-                  <Link to="/addService">Add a New Service</Link>
-                </li>
-                <li>
-                  <Link to="/bookedServices">Manage Services</Link>
-                </li>
-                <Link to={`/viewBooking/${service_id}`}>View Booking</Link>
-              </ul>
-            </li>
-          </ul>
+          <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
 
-        {/* Right Side - Auth Controls */}
-        <div className="navbar-end flex items-center space-x-3">
+        {/* Navbar End */}
+        <div className="navbar-end gap-4">
           {!user ? (
             <>
               <Link to="/register" className="btn btn-primary">
@@ -133,15 +115,17 @@ const Navbar = () => {
               <button onClick={handleSignOut} className="btn">
                 Log Out
               </button>
-              {user.photoURL ? (
-                <img
-                  src={user.photoURL}
-                  alt="User"
-                  className="w-10 h-10 rounded-full border"
-                />
-              ) : (
-                <span className="font-bold">{user.displayName || 'User'}</span>
-              )}
+              <div className="flex items-center gap-2">
+                {user.photoURL ? (
+                  <img
+                    src={user.photoURL}
+                    alt="User"
+                    className="w-10 h-10 rounded-full border"
+                  />
+                ) : (
+                  <span className="font-bold">{user.displayName || 'User'}</span>
+                )}
+              </div>
             </>
           )}
         </div>
