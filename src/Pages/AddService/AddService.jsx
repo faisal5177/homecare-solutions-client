@@ -57,7 +57,6 @@ const AddService = ({ setServices }) => {
       if (response.ok && data.serviceId) {
         Swal.fire("Success", "Service has been added successfully!", "success");
 
-        // **নতুন সার্ভিস UI-তে সরাসরি দেখানোর জন্য setServices আপডেট করুন**
         if (setServices) {
           setServices((prevServices) => [
             ...prevServices,
