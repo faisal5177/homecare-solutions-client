@@ -10,7 +10,6 @@ import AddService from './../Pages/AddService/AddService';
 import ServiceDetails from './../Pages/ServiceDetails/ServiceDetails';
 import AllServices from '../Pages/AllServices/AllServices';
 import MyBookings from '../Pages/MyBookings/MyBookings';
-import ViewBookings from '../Pages/ViewBookings/ViewBookings';
 import MyBookedServices from '../Pages/MyBookedServices/MyBookedServices';
 
 const router = createBrowserRouter([
@@ -46,7 +45,6 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:5000/services/${params.id}`),
       },
-
       {
         path: 'addService',
         element: (
@@ -56,20 +54,23 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path : 'myBookings',
-        element : <PrivateRoute><MyBookings></MyBookings></PrivateRoute>,
-      },
-      {
-        path : 'viewBookings/:service_id',
-        element : <PrivateRoute><ViewBookings></ViewBookings></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/service-bookings?serviceId=${params.service_id}`)
+        path: 'myBookings',
+        element: (
+          <PrivateRoute>
+            <MyBookings></MyBookings>
+          </PrivateRoute>
+        ),
       },
       {
         path: 'myBookedServices',
-        element: <PrivateRoute><MyBookedServices></MyBookedServices></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyBookedServices></MyBookedServices>
+          </PrivateRoute>
+        ),
       },
       {
-        path: "/serviceBookingApply/:id",
+        path: '/serviceBookingApply/:id',
         element: (
           <PrivateRoute>
             <ServiceBookingApply />
