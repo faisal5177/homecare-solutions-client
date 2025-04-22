@@ -118,9 +118,8 @@ const MyBookedServices = () => {
                   >
                     <option disabled>Change Status</option>
                     <option>Pending</option>
-                    <option>Confirmed</option>
+                    <option>working</option>
                     <option>Completed</option>
-                    <option>Cancelled</option>
                   </select>
                 </td>
               </tr>

@@ -24,13 +24,13 @@ const AddService = ({ setServices }) => {
         initialData.service_image ||
         user?.photoURL ||
         "https://placehold.co/150",
-      service_name: initialData.name,
+      service_name: initialData.service_name,
       price: parseFloat(initialData.price),
       service_area: initialData.location,
       service_description: initialData.description,
       service_provider: {
         provider_id: user?.uid || "N/A",
-        name: initialData.name || user?.displayName || "Unknown",
+        name: initialData.provider_name || user?.displayName || "Unknown",
         image:
           initialData.image ||
           user?.photoURL ||
@@ -88,28 +88,24 @@ const AddService = ({ setServices }) => {
           width="50"
           className="mx-auto rounded-full"
         />
-        <p>
-          <strong>Name:</strong> {user?.displayName || "Unknown"}
-        </p>
-        <p>
-          <strong>Email:</strong> {user?.email || "Not Available"}
-        </p>
+        <p><strong>Name:</strong> {user?.displayName || "Unknown"}</p>
+        <p><strong>Email:</strong> {user?.email || "Not Available"}</p>
       </div>
 
       <form onSubmit={handleAddService} className="card-body">
-        {/* Service Provider Name */}
+        {/* Provider Name */}
         <div className="form-control">
           <label className="label">Service Provider Name</label>
           <input
             type="text"
-            name="name"
+            name="provider_name"
             defaultValue={user?.displayName || ""}
             className="w-full input input-bordered"
             required
           />
         </div>
 
-        {/* Service Provider Email */}
+        {/* Provider Email */}
         <div className="form-control">
           <label className="label">Service Provider Email</label>
           <input
@@ -121,7 +117,7 @@ const AddService = ({ setServices }) => {
           />
         </div>
 
-        {/* Service Provider Image */}
+        {/* Provider Image */}
         <div className="form-control">
           <label className="label">Service Provider Image URL</label>
           <input
@@ -132,46 +128,54 @@ const AddService = ({ setServices }) => {
           />
         </div>
 
-        {/* Service Details */}
+        {/* Service Image */}
         <div className="form-control">
           <label className="label">Service Image URL</label>
           <input
             type="text"
-            placeholder="Image URL"
             name="service_image"
+            placeholder="Image URL"
             className="w-full input input-bordered"
           />
         </div>
+
+        {/* Service Name */}
         <div className="form-control">
           <label className="label">Service Name</label>
           <input
             type="text"
+            name="service_name"
             placeholder="Service Name"
-            name="name"
             className="w-full input input-bordered"
             required
           />
         </div>
+
+        {/* Price */}
         <div className="form-control">
           <label className="label">Price</label>
           <input
             type="number"
-            placeholder="Price"
             name="price"
+            placeholder="Price"
             className="w-full input input-bordered"
             required
           />
         </div>
+
+        {/* Location */}
         <div className="form-control">
           <label className="label">Service Location</label>
           <input
             type="text"
-            placeholder="Location"
             name="location"
+            placeholder="Location"
             className="w-full input input-bordered"
             required
           />
         </div>
+
+        {/* Description */}
         <div className="form-control">
           <label className="label">Description</label>
           <textarea
@@ -182,6 +186,7 @@ const AddService = ({ setServices }) => {
           ></textarea>
         </div>
 
+        {/* Submit Button */}
         <div className="form-control mt-6">
           <button
             type="submit"

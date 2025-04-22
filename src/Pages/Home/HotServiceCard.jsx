@@ -14,12 +14,10 @@ const HotServiceCard = ({ service }) => {
 
   return (
     <div className="card bg-white shadow-md border rounded-lg p-3 mb-5">
-      {/* Service Image */}
       <figure>
         <img className="rounded-t-lg w-full h-40 object-cover" src={service_image} alt={service_name} />
       </figure>
 
-      {/* Card Body */}
       <div className="card-body p-3">
         <h2 className="text-lg font-semibold">{service_name}</h2>
         <p className="text-gray-600 text-sm">
@@ -32,7 +30,6 @@ const HotServiceCard = ({ service }) => {
           <p className="text-xs font-medium">{provider_name}</p>
         </div>
 
-        {/* Price & View Details */}
         <div className="flex justify-between items-center mt-2">
           <p className="text-sm font-bold text-primary">${price}</p>
           <p className="text-xs text-gray-500">{formattedDate}</p>
