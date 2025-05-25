@@ -65,7 +65,7 @@ const MyBookedServices = () => {
   return (
     <div>
       <h2 className="text-3xl mb-4 font-semibold">
-        My Booked Services: {bookings.length}
+       Booked Services: {bookings.length}
       </h2>
 
       <div className="overflow-x-auto">

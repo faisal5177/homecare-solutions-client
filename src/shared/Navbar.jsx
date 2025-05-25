@@ -26,8 +26,8 @@ const Navbar = () => {
             <div tabIndex={0} role="button" className="">Dashboard</div>
             <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
               <li><Link to="/addService">Add Service</Link></li>
-              <li><Link to="/myBookings">Booked-Services</Link></li>
-              <li><Link to='/myBookedServices'>Manager Service</Link></li>
+              <li><Link to="/myBookings">Manage Services</Link></li>
+              <li><Link to='/myBookedServices'>Service To Do </Link></li>
             </ul>
           </div>
         </li>
