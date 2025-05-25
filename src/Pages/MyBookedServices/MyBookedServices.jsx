@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
 
+
 const MyBookedServices = () => {
   const [bookings, setBookings] = useState([]);
   const { user } = useAuth();
@@ -11,7 +12,9 @@ const MyBookedServices = () => {
       fetch(`http://localhost:5000/enriched-bookings?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => setBookings(data))
-        .catch((err) => console.error('Error fetching bookings:', err));
+        .catch((err) =>
+          console.error('Error fetching enriched bookings:', err)
+        );
     }
   }, [user?.email]);
 
@@ -27,27 +30,26 @@ const MyBookedServices = () => {
       body: JSON.stringify(data),
     })
       .then((res) => {
-        if (!res.ok) {
-          throw new Error('Failed to update status');
-        }
+        if (!res.ok) throw new Error('Failed to update status');
         return res.json();
       })
       .then((data) => {
-        if (data.modifiedCount) {
+        console.log('Update response:', data);
+        if (data.modifiedCount && data.modifiedCount > 0) {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Your update has been placed!',
+            title: 'Status updated successfully!',
             showConfirmButton: false,
             timer: 1500,
           });
-
-          // Update local state
           setBookings((prevBookings) =>
             prevBookings.map((booking) =>
               booking._id === id ? { ...booking, status: newStatus } : booking
             )
           );
+        } else {
+          throw new Error('No documents updated');
         }
       })
       .catch((err) => {
@@ -55,9 +57,8 @@ const MyBookedServices = () => {
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Your update has been placed!',
-          showConfirmButton: false,
-          timer: 1500,
+          title: 'Status updated successfully!',
+          showConfirmButton: true,
         });
       });
   };
@@ -65,7 +66,7 @@ const MyBookedServices = () => {
   return (
     <div>
       <h2 className="text-3xl mb-4 font-semibold">
-       Booked Services: {bookings.length}
+        My Booked Services: {bookings.length}
       </h2>
 
       <div className="overflow-x-auto">
@@ -109,7 +110,7 @@ const MyBookedServices = () => {
                     : 'No Date'}
                 </td>
                 <td>{booking.price ? `${booking.price}৳` : 'N/A'}</td>
-                <td>{booking.location || 'Unknown'}</td>
+                <td>{booking.location || user.location || 'Unknown'}</td>{' '}
                 <td>
                   <select
                     onChange={(e) => handleStatusUpdate(e, booking._id)}

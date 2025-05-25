@@ -11,6 +11,7 @@ import ServiceDetails from './../Pages/ServiceDetails/ServiceDetails';
 import AllServices from '../Pages/AllServices/AllServices';
 import MyBookings from '../Pages/MyBookings/MyBookings';
 import MyBookedServices from '../Pages/MyBookedServices/MyBookedServices';
+import ViewBookings from './../Pages/ViewBookings/ViewBookings';
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
             <MyBookedServices></MyBookedServices>
           </PrivateRoute>
         ),
+      },            
+      {
+        path : 'viewBookings',
+        element : <PrivateRoute><ViewBookings /></PrivateRoute>,
       },
       {
         path: '/serviceBookingApply/:id',
